@@ -57,7 +57,7 @@ def GetStudentInfo(HW,names='students.txt'):
                 if surname.split(" ")[-1] != surname:
                     surname = surname.split(" ")[-1]
                 for homework in homeworks:
-                    if name.lower() in homework.lower() and surname.lower() in homework.lower():
+                    if name.lower() in homework.lower() and surname.lower() in homework.lower(): #TODO: implement accent support 
                         return os.path.join("HW{}".format(HW),homework)
                     
                 print("Student {} didn't hand the homework".format(name))
@@ -73,12 +73,15 @@ def SendEmails(flags):
     ''' Send emails with attachments '''
     names  = GetStudentInfo(flags.HW)
 
-    subject = 'HW{} results'.format(flags.HW)
+    subject = 'HW{} corrections'.format(flags.HW)
     for name in names:
-        base_email = '''Hello {},
-In attachment is your corrected homework. Let me know in case you have questions or if the corrections do not display properly.
+        base_email = '''Dear {},
+
+In attachment is your corrected homework. Please let me know in case you have questions or if the corrections do not display properly.
+
 Cheers,
-Vinicius
+
+Marc
         '''.format(name)
         #print(base_email)
 
